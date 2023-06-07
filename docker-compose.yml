@@ -1,0 +1,71 @@
+version: '3.5'
+
+networks:
+  backend:
+    driver: ${NETWORKS_DRIVER}
+
+volumes:
+  backendcode:
+
+services:
+
+  ### NGINX Server #########################################
+  nginx:
+    build: ./nginx
+    hostname: backend
+    restart: always
+    volumes:
+      - ./nginx/src:/var/www
+      - ${DATA_PATH_HOST}/storage:/var/www/storage
+    depends_on:
+      - php-fpm
+    networks:
+      - backend
+
+  ### Workspace Utilities ##################################
+  workspace:
+    build: ./workspace
+    hostname: workspace
+    restart: always
+    volumes:
+      - ./nginx/src:/var/www
+      - ${DATA_PATH_HOST}/storage:/var/www/storage
+    extra_hosts:
+      - "dockerhost:${DOCKER_HOST_IP}"
+    tty: true
+    environment:
+      - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
+    depends_on:
+      - nginx
+    networks:
+      - backend
+
+  ### PHP-FPM ##############################################
+  php-fpm:
+    build: ./php-fpm
+    hostname: php-fpm
+    restart: always
+    expose:
+      - "9000"
+    extra_hosts:
+      - "dockerhost:${DOCKER_HOST_IP}"
+    environment:
+      - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
+      - FAKETIME=${PHP_FPM_FAKETIME}
+    networks:
+      - backend
+
+  ### PHP Worker ############################################
+  php-worker:
+    build: ./php-worker
+    hostname: php-worker
+    restart: always
+    volumes:
+      - ./nginx/src:/var/www
+      - ${DATA_PATH_HOST}/storage:/var/www/storage
+    depends_on:
+      - nginx
+    extra_hosts:
+      - "dockerhost:${DOCKER_HOST_IP}"
+    networks:
+      - backend
