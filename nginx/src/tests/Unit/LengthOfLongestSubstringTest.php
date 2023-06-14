@@ -8,7 +8,26 @@ class LengthOfLongestSubstringTest extends TestCase
 {
     public function testLengthOfLongestSubstring()
     {
-        $this->lengthOfLongestSubstring('dvdf');
+        $outPut = $this->lengthOfLongestSubstring('abcabcbb');
+        $this->assertSame($outPut, 3);
+
+        $outPut = $this->lengthOfLongestSubstring('bbbbb');
+        $this->assertSame($outPut, 1);
+
+        $outPut = $this->lengthOfLongestSubstring('pwwkew');
+        $this->assertSame($outPut, 3);
+
+        $outPut = $this->lengthOfLongestSubstring('dvdf');
+        $this->assertSame($outPut, 3);
+
+        $outPut = $this->lengthOfLongestSubstring('au');
+        $this->assertSame($outPut, 2);
+
+        $outPut = $this->lengthOfLongestSubstring(' ');
+        $this->assertSame($outPut, 1);
+
+        $outPut = $this->lengthOfLongestSubstring('');
+        $this->assertSame($outPut, 0);
     }
 
     /*
