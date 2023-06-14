@@ -38,14 +38,8 @@ class TwoSumTest extends TestCase
      * Example 3:
      * Input: nums = [3,3], target = 6
      * Output: [0,1]
-     *
-     * time complexity O(n)
-     * space complexity O(n)
-     *
-     * note:
-     * 因確定答案只會有2個，故迴圈找 map 中是否有另一個匹配的數字
-    */
-    private function twoSum(array $nums, int $target)
+     */
+    private function twoSum(array $nums, int $target): ?array
     {
         $numIndexMap = [];
 

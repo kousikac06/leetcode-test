@@ -8,11 +8,11 @@ class CombinationSumTest extends TestCase
 {
     public function testCombinationSum()
     {
-        $outPut = $this->combinationSum([2,3,6,7], 7);
-        $this->assertSame($outPut, [[2,2,3],[7]]);
+        $outPut = $this->combinationSum([2, 3, 6, 7], 7);
+        $this->assertSame($outPut, [[2, 2, 3], [7]]);
 
-        $outPut = $this->combinationSum([2,3,5], 8);
-        $this->assertSame($outPut, [[2,2,2,2],[2,3,3],[3,5]]);
+        $outPut = $this->combinationSum([2, 3, 5], 8);
+        $this->assertSame($outPut, [[2, 2, 2, 2], [2, 3, 3], [3, 5]]);
 
         $outPut = $this->combinationSum([2], 1);
         $this->assertSame($outPut, []);
@@ -40,10 +40,7 @@ class CombinationSumTest extends TestCase
      * Example 3:
      * Input: candidates = [2], target = 1
      * Output: []
-     *
-     * time complexity O(n)
-     * space complexity O(n)
-    */
+     */
     private function combinationSum(array $candidates, int $target)
     {
         $out = [];
