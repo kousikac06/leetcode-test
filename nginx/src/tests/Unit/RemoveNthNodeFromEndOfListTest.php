@@ -9,8 +9,7 @@ class RemoveNthNodeFromEndOfListTest extends TestCase
     public function testRemoveNthNodeFromEndOfList()
     {
         for ($i = 5; $i >= 1; $i--) {
-            $node = new ListNode($i, $head ?? null);
-            $head = $node;
+            $head = new ListNode($i, $head ?? null);
         }
 
         $outPut = $this->removeNthFromEnd($head, 2);
